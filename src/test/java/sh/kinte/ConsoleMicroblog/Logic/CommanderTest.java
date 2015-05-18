@@ -22,6 +22,7 @@ public class CommanderTest {
 
     @Test
     public void testProcessInput() {
+        assertNotNull(commander);
         Command post = commander.processInput("Alice -> I love the weather today");
         assertNotNull(post);
         assertEquals(post.getCommandType(), CommandType.POST);
@@ -43,5 +44,24 @@ public class CommanderTest {
         assertNotNull(wall);
         assertEquals(wall.getCommandType(), CommandType.WALL);
         assertEquals(wall.getUsername(), "Charlie");
+    }
+
+    @Test
+    public void testRunCommand() {
+        assertNotNull(commander);
+
+        commander.runCommand("Alice -> I love the weather today");
+        commander.runCommand("Bob -> Damn! We lost!");
+        commander.runCommand("Bob -> Good game though.");
+
+        commander.runCommand("Alice");
+        commander.runCommand("Bob");
+
+        commander.runCommand("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+        commander.runCommand("Charlie follows Alice");
+        commander.runCommand("Charlie wall");
+        commander.runCommand("Charlie follows Bob");
+        commander.runCommand("Charlie wall");
+
     }
 }

@@ -1,5 +1,7 @@
 package sh.kinte.ConsoleMicroblog;
 
+import sh.kinte.ConsoleMicroblog.Logic.Commander;
+
 import java.util.Scanner;
 
 /**
@@ -7,25 +9,22 @@ import java.util.Scanner;
  */
 public class App {
 
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         new App();
     }
 
-
     private Scanner scanner;
-    private String input;
+    private Commander commander;
 
     public App() {
-        System.out.println("Console Microblog");
+        System.out.println("Welcome to Console Microblog!\n" +
+                "=============================");
 
         scanner = new Scanner(System.in);
+        commander = new Commander();
 
-//        while (true) {
-//            input = scanner.next();
-//
-//            System.out.println(input);
-//
-//        }
+        while (true) {
+            commander.runCommand(scanner.nextLine());
+        }
     }
-
 }

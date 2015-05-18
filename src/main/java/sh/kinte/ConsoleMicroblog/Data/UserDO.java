@@ -13,5 +13,9 @@ public interface UserDO {
 
     Set<User> findAll();
 
-    User create(User user);
+    User create(String username);
+
+    void addFollowing(String username, String anotherUser);
+
+    Set<String> getFollowing(String username);
 }

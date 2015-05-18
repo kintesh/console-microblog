@@ -1,18 +1,31 @@
 package sh.kinte.ConsoleMicroblog.Entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by kintesh on 16/05/15.
  */
 public class User {
 
     private String name;
+    private Set<String> following;
 
     public User(String name) {
         this.name = name;
+        this.following = new HashSet<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public Set<String> getFollowing() {
+        return following;
+    }
+
+    public void addFollowing(String anotherUser) {
+        this.following.add(anotherUser);
     }
 
     @Override

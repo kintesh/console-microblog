@@ -12,9 +12,11 @@ import java.util.Set;
 public class UserDOImpl implements UserDO {
 
     private Set<User> users;
+    private Set<String> following;
 
     public UserDOImpl() {
         users = new HashSet<>();
+        following = new HashSet<>();
     }
 
     @Override
@@ -31,8 +33,19 @@ public class UserDOImpl implements UserDO {
     }
 
     @Override
-    public User create(User user) {
+    public User create(String username) {
+        User user = new User(username);
         users.add(user);
         return user;
+    }
+
+    @Override
+    public void addFollowing(String username, String anotherUser) {
+        findByUsername(username).addFollowing(anotherUser);
+    }
+
+    @Override
+    public Set<String> getFollowing(String username) {
+        return findByUsername(username).getFollowing();
     }
 }

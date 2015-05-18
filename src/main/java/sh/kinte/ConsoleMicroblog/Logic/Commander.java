@@ -1,7 +1,5 @@
 package sh.kinte.ConsoleMicroblog.Logic;
 
-import sh.kinte.ConsoleMicroblog.Data.UserDO;
-import sh.kinte.ConsoleMicroblog.Data.UserDOImpl;
 import sh.kinte.ConsoleMicroblog.Entity.Command;
 import sh.kinte.ConsoleMicroblog.Entity.CommandType;
 
@@ -14,21 +12,39 @@ import java.util.regex.Pattern;
 public class Commander {
 
     private Pattern commandPattern;
-    private UserDO users;
+    private Service service;
 
     public Commander() {
         commandPattern = Pattern.compile("([\\S]+)(?: *)([\\S]*)(?: *)([\\S ]*)");
-        users = new UserDOImpl();
+        service = new Service();
     }
 
     public void runCommand(String input) {
-        processInput(input);
+        Command command = processInput(input);
+        if (command != null) {
+            switch (command.getCommandType()) {
+                case POST:
+                    service.post(command.getUsername(), command.getMessage());
+                    break;
+                case FOLLOW:
+                    service.follow(command.getUsername(), command.getAnotherUser());
+                    break;
+                case WALL:
+                    System.out.println(service.wall(command.getUsername()));
+                    break;
+                case READ:
+                    System.out.println(service.read(command.getUsername()));
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     protected Command processInput(String input) {
         Matcher matcher = commandPattern.matcher(input);
         Command command = null;
-        if(matcher.find()) {
+        if (matcher.find()) {
             command = new Command(matcher.group(1));
             if (CommandType.POST.getCommand().equals(matcher.group(2))) {
                 command.setCommandType(CommandType.POST);

@@ -1,7 +1,6 @@
 package sh.kinte.ConsoleMicroblog.Data;
 
 import sh.kinte.ConsoleMicroblog.Entity.Post;
-import sh.kinte.ConsoleMicroblog.Entity.User;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,23 +13,17 @@ import static java.util.stream.Collectors.toSet;
 public class PostDOImpl implements PostDO {
 
     private Set<Post> posts;
-    private UserDO users;
 
-    public PostDOImpl(UserDO users) {
+    public PostDOImpl() {
         posts = new HashSet<>();
-        this.users = users;
     }
 
     @Override
     public Set<Post> findByUsername(String username) {
-        User user = users.findByUsername(username);
-        Set<Post> found = null;
-        if (user != null) {
-            found = posts.stream()
-                    .filter(p -> p.getUser().equals(user))
-                    .sorted((p1, p2) -> p1.getDate().compareTo(p2.getDate()))
-                    .collect(toSet());
-        }
+        Set<Post> found = posts.stream()
+                .filter(p -> p.getUsername().equals(username))
+                .sorted((p1, p2) -> p2.getDate().compareTo(p1.getDate()))
+                .collect(toSet());
         return found;
     }
 

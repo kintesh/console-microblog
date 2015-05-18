@@ -8,18 +8,18 @@ import java.time.LocalDateTime;
  */
 public class Post {
 
-    private User user;
+    private String username;
     private String message;
     private LocalDateTime date;
 
-    public Post(User user, String message) {
-        this.user = user;
+    public Post(String user, String message) {
+        this.username = user;
         this.message = message;
         this.date = LocalDateTime.now();
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
     public String getMessage() {
@@ -51,7 +51,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "P: " + getUser() + " " + getMessage() + " " + getDate();
+        return "P: " + getUsername() + " " + getMessage() + " " + getDate();
     }
 
 }
