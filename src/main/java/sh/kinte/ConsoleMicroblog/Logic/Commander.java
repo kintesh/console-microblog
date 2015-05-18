@@ -25,9 +25,11 @@ public class Commander {
             switch (command.getCommandType()) {
                 case POST:
                     service.post(command.getUsername(), command.getMessage());
+                    System.out.println("");
                     break;
                 case FOLLOW:
                     service.follow(command.getUsername(), command.getAnotherUser());
+                    System.out.println("");
                     break;
                 case WALL:
                     System.out.println(service.wall(command.getUsername()));

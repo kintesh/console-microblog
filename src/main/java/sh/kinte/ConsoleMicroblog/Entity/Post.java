@@ -37,7 +37,7 @@ public class Post {
             if (diff < 2) ds = diff + " second a go";
             else ds = diff + " seconds a go";
         } else if (diff < 3600) {
-            if (diff / 60 < 2L) ds = diff / 60 + " minute a go";
+            if (diff / 60 < 2) ds = diff / 60 + " minute a go";
             else ds = diff / 60 + " minutes a go";
         } else if (diff < 86400) {
             if (diff / 3600 < 2) ds = diff / 3600 + " hour a go";

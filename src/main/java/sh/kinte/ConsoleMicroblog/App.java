@@ -17,8 +17,8 @@ public class App {
     private Commander commander;
 
     public App() {
-        System.out.println("Welcome to Console Microblog!\n" +
-                "=============================");
+        System.out.println("  Welcome to Console Microblog!\n" +
+                           "*===============================*\n");
 
         scanner = new Scanner(System.in);
         commander = new Commander();
